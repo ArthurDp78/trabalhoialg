@@ -1,12 +1,13 @@
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 
 using namespace std;
 
 struct animais{
 	int identificador;
 	string nome;
-	string país;
+	string pais;
 	string classe;
 	short vida;
 };
@@ -18,7 +19,7 @@ void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 		arquivo >> exoticos[i].identificador;
 		arquivo >> lixo; //lê a virgula
 		getline(arquivo, exoticos[i].nome,',');
-		getline(arquivo, exoticos[i].país,',');
+		getline(arquivo, exoticos[i].pais,',');
 		arquivo >> exoticos[i].classe;
 		arquivo >> exoticos[i].vida;
 		arquivo.ignore(); //pula fim de linha
@@ -31,7 +32,7 @@ void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 			for(int j=0; j < tamanho; j++){
 				novo[j].identificador = exoticos[j].identificador;
 				novo[j].nome = exoticos[j].nome;
-				novo[j].país = exoticos[j].país;
+				novo[j].pais = exoticos[j].pais;
 				novo[j].classe = exoticos[j].classe;
 				novo[j].vida = exoticos[j].vida;
 			}
@@ -44,7 +45,7 @@ void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 			arquivo >> exoticos[i].identificador;
 			arquivo >> lixo; //lê a virgula
 			getline(arquivo, exoticos[i].nome,',');
-			getline(arquivo, exoticos[i].país,',');
+			getline(arquivo, exoticos[i].pais,',');
 			arquivo >> exoticos[i].classe;
 			arquivo >> exoticos[i].vida;
 			arquivo.ignore(); //pula fim de linha
@@ -57,16 +58,17 @@ void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 
 void saida(animais* exoticos, int tamanho){
 	for(int k = 0; k <tamanho; k++){
-		cout << exoticos[k].identificador << ", ";
-		cout << exoticos[k].nome << ", ";
-		cout << exoticos[k].país << ", ";
+		cout << exoticos[k].identificador << ",";
+		cout << exoticos[k].nome << ",";
+		cout << exoticos[k].pais << ", ";
 		cout << exoticos[k].classe<<" " ;
 		cout << exoticos[k].vida << endl;
 	}
+	
 }
 
 int main(){
-	ifstream arquivo("trabalho.csv");
+	ifstream arquivo("animais.csv");
 	int tamanho=40;
 	string linha;
 	
