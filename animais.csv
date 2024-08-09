@@ -1,53 +1,53 @@
 # identificador; nome; país; classe; tempo de vida
-1, Aye-Aye, Madagascar, Mamifero, 23 
-2, Kakapo, Nova Zelandia, Aves, 60
-3, Narval, Artico, Mamifero, 60
-4, Okapi, Republica Democratica do Congo, Mamifero, 20
-5, Pangolim, Africa, Mamifero, 20
-6, Quokka, Australia, Mamifero, 15
-7, Axolote, Mexico, Anfibio, 15
-8, Cacatua-de-crista-amarela, Australia, Aves, 60
-9, Dragao-Barbudo, Australia, Reptil, 15
-10, Fossa, Madagascar, Mamifero, 20
-11, Solands-Petrel, Ilhas Galapagos, Aves, 30
-12, Gaur, India, Mamifero, 20
-13, Kinkajou, America Central, Mamifero, 15
-14, Paca, America do Sul, Mamifero, 8
-15, Rata-do-Pacifico, Nova Zelandia, Mamifero, 10
-16, Peixe-lua, Oceano Pacifico, Peixe, 10
-17, Tamandua-bandeira, America do Sul, Mamifero, 16
-18, Tatu-bola, Brasil, Mamifero, 15
-19, Cacatua-de-crista-rosa, Australia, Aves, 40
-20, Bufalo-africano, Africa, Mamifero, 25
-21, Lemure-de-cauda-anelada, Madagascar, Mamifero, 19
-22, Peixe-cavalo, Oceano Pacifico, Peixe, 5
-23, Tartaruga-de-couro, Oceano Atlantico, Reptil, 50
-24, Furao-domestico, Europa, Mamifero, 10
-25, Pato-mergulhao, America do Norte, Aves, 20
-26, Bongo, Africa, Mamifero, 20
-27, Javali-do-berco, Africa, Mamifero, 20
-28, Galo-da-india, America do Norte, Aves, 10
-29, Cacatua-de-crista-laranja, Australia, Aves, 60
-30, Morcego-vampiro, America Latina, Mamifero, 9
-31, Cacatua-negra, Indonesia, Aves, 40
-32, Peixe-dragao, Oceano Pacifico, Peixe, 5
-33, Iaque, Nepal, Mamifero, 20
-34, Gecko-leopardo, Asia Central, Reptil, 20
-35, Lynx, Europa, Mamifero, 15
-36, Manati, America do Sul, Mamifero, 60
-37, Cacatua-de-crista-preta, Indonesia, Aves, 40
-38, Cavalo-marinho, Oceano Pacifico, Peixe, 5
-39, Tartaruga-de-pente, Oceano Atlantico, Reptil, 30
-40, Arapaima, Amazonia, Peixe, 20
-41, Suricata, Africa, Mamifero, 14
-42, Cavalo-marinho-dwarf, Oceano Pacifico, Peixe, 2
-43, Cacatua-de-crista-branca, Australia, Aves, 60
-44, Robalo-de-barbatana, Oceano Atlantico, Peixe, 20
-45, Cagado-de-papo-amarelo, America do Sul, Reptil, 30
-46, Pangolim-de-bico-curto, Africa, Mamifero, 15
-47, Gato-de-pallas, Asia Central, Mamifero, 12
-48, Tigre-siberiano, Russia, Mamifero, 20
-49, Robalo-azul, Oceano Pacifico, Peixe, 20
-50, Olingo, America Central, Mamifero, 15
+1,Aye-Aye,Madagascar,Mamifero ,23 
+2,Kakapo,Nova Zelandia,Aves ,60
+3,Narval,Artico,Mamifero ,60
+4,Okapi,Republica Democratica do Congo,Mamifero ,20
+5,Pangolim,Africa,Mamifero ,20
+6,Quokka,Australia,Mamifero ,15
+7,Axolote,Mexico,Anfibio ,15
+8,Cacatua-de-crista-amarela,Australia,Aves ,60
+9,Dragao-Barbudo,Australia,Reptil ,15
+10,Fossa,Madagascar,Mamifero ,20
+11,Solands-Petrel,Ilhas Galapagos,Aves ,30
+12,Gaur,India,Mamifero ,20
+13,Kinkajou,America Central,Mamifero ,15
+14,Paca,America do Sul,Mamifero ,8
+15,Rata-do-Pacifico,Nova Zelandia,Mamifero ,10
+16,Peixe-lua,Oceano Pacifico,Peixe ,10
+17,Tamandua-bandeira,America do Sul,Mamifero ,16
+18,Tatu-bola,Brasil,Mamifero ,15
+19,Cacatua-de-crista-rosa,Australia,Aves ,40
+20,Bufalo-africano,Africa,Mamifero ,25
+21,Lemure-de-cauda-anelada,Madagascar,Mamifero ,19
+22,Peixe-cavalo,Oceano Pacifico,Peixe ,5
+23,Tartaruga-de-couro,Oceano Atlantico,Reptil ,50
+24,Furao-domestico,Europa,Mamifero ,10
+25,Pato-mergulhao,America do Norte,Aves ,20
+26,Bongo, Africa,Mamifero ,20
+27,Javali-do-berco,Africa,Mamifero ,20
+28,Galo-da-india,America do Norte,Aves ,10
+29,Cacatua-de-crista-laranja,Australia,Aves ,60
+30,Morcego-vampiro,America Latina,Mamifero ,9
+31,Cacatua-negra,Indonesia,Aves ,40
+32,Peixe-dragao,Oceano Pacifico,Peixe ,5
+33,Iaque,Nepal,Mamifero ,20
+34,Gecko-leopardo,Asia Central,Reptil ,20
+35,Lynx,Europa,Mamifero ,15
+36,Manati,America do Sul,Mamifero ,60
+37,Cacatua-de-crista-preta,Indonesia,Aves ,40
+38,Cavalo-marinho,Oceano Pacifico,Peixe ,5
+39,Tartaruga-de-pente,Oceano Atlantico,Reptil ,30
+40,Arapaima,Amazonia,Peixe ,20
+41,Suricata,Africa,Mamifero ,14
+42,Cavalo-marinho-dwarf,Oceano Pacifico,Peixe ,2
+43,Cacatua-de-crista-branca,Australia,Aves ,60
+44,Robalo-de-barbatana,Oceano Atlantico,Peixe ,20
+45,Cagado-de-papo-amarelo,America do Sul,Reptil ,30
+46,Pangolim-de-bico-curto,Africa,Mamifero ,15
+47,Gato-de-pallas,Asia Central,Mamifero ,12
+48,Tigre-siberiano,Russia,Mamifero ,20
+49,Robalo-azul,Oceano Pacifico,Peixe ,20
+50,Olingo,America Central,Mamifero ,15
 
 
