@@ -20,6 +20,7 @@ void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 		getline(arquivo, exoticos[i].nome,',');
 		getline(arquivo, exoticos[i].pais,',');
 		arquivo >> exoticos[i].classe;
+		arquivo >> lixo;
 		arquivo >> exoticos[i].vida;
 		arquivo.ignore(); //pula fim de linha
 		
@@ -46,6 +47,7 @@ void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 			getline(arquivo, exoticos[i].nome,',');
 			getline(arquivo, exoticos[i].pais,',');
 			arquivo >> exoticos[i].classe;
+			arquivo >> lixo;
 			arquivo >> exoticos[i].vida;
 			arquivo.ignore(); //pula fim de linha
 		
@@ -57,10 +59,10 @@ void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 
 void saida(animais* exoticos, int tamanho){
 	for(int k = 0; k<tamanho; k++){
-		cout << exoticos[k].identificador << ", ";
-		cout << exoticos[k].nome << ", ";
-		cout << exoticos[k].pais << ", ";
-		cout << exoticos[k].classe<<" " ;
+		cout << exoticos[k].identificador << ",";
+		cout << exoticos[k].nome << "," ;
+		cout << exoticos[k].pais << "," ;
+		cout << exoticos[k].classe << ",";
 		cout << exoticos[k].vida << endl;
 	}
 	
@@ -83,7 +85,7 @@ void adcionar(animais* exoticos,int &tamanho){
 }
 
 int main(){
-	ifstream arquivo("test.csv");
+	ifstream arquivo("animais.csv");
 	int tamanho=40;
 	string linha;
 	
@@ -94,7 +96,7 @@ int main(){
 	
 	leitura(arquivo,exoticos,tamanho);
 	
-	short n;
+	int n;
 	cin >> n;
 	
 	if(n == 1){    //caso de saida
