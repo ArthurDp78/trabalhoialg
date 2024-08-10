@@ -13,8 +13,6 @@ struct animais{
 	short vida;
 };
 
-	
-
 void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 	char lixo;
 	int i=0;
@@ -61,7 +59,29 @@ void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 	}	
 	tamanho = i-1;
 }
-	
+int particionaIdent(animais* exoticos, int c, int f) { 
+   int pivo = exoticos[c].identificador, i = c+1, j = f;
+   while (i <= j) {
+       if (exoticos[i].identificador <= pivo) i++;
+       else if (pivo <= exoticos[j].identificador) j--; 
+       else { 
+           swap (exoticos[i],exoticos[j]);
+           i++;
+           j--;
+       }
+   }                
+   exoticos[c].identificador = exoticos[j].identificador;
+   exoticos[j].identificador = pivo;
+   return j; 
+}
+void quicksortIdent(animais* exoticos, int pos_pivo, int fim) {
+   int pos_novo_pivo;         
+   if (pos_pivo < fim) {  
+      pos_novo_pivo = particionaIdent(exoticos, pos_pivo, fim);
+      quicksortIdent(exoticos, pos_pivo, pos_novo_pivo - 1); 
+      quicksortIdent(exoticos, pos_novo_pivo + 1, fim); 
+   }
+}	
 
 void saida(animais* exoticos, int tamanho,bool &erro){
 	cout << "Voce deseja mostrar todos os dados?"<< endl;
@@ -119,17 +139,16 @@ void adcionar(animais* exoticos,int &tamanho){
 		cin >> exoticos[i].classe;
 		cout << "Adcionar tempo de vida: ";
 		cin >> exoticos[i].vida;
-		}
-		 
-		
+		}	
 }
-void menu(animais*exoticos, int tamanho,bool erro){
+void menu(animais*exoticos, int tamanho,bool &erro){
 	system("cls");
 	int n;
 	int resposta=0;
 	cout << "O que deseja fazer?" << endl;
 	cout << "1- Mostrar os dados do existentes no programa" << endl;
 	cout << "2- Adicionar dados no programa" << endl;
+	cout << "3- Ordenar os dados" << endl;
 	cout <<"5- Sair do programa" << endl;
 	cin >> n;
 	
@@ -150,13 +169,82 @@ void menu(animais*exoticos, int tamanho,bool erro){
 		menu(exoticos,tamanho,erro);
 	}
 }
-	if(n == 2){	   //caso de adição de animais
+	else if(n == 2){	   //caso de adição de animais
 		adcionar(exoticos,tamanho);
 		system("cls");
 		menu(exoticos,tamanho,erro);
 		
 		}
-	if(n==5){ //caso de encerramento do programa
+	else if(n==3){ // ordenar o vetor 
+		cout <<"Deseja ordenar por identificador ou por nome do animal?"<< endl;
+		cout << "1- Identificador" << endl;
+		cout << "2 - Nome do Animal"<< endl;
+		cin >> resposta;
+		
+		if(resposta == 1){//ordenar por identificador
+			resposta = 0;
+			quicksortIdent(exoticos,0,tamanho-1);
+			system("cls");
+			cout << "Os dados foram ordenados por identificador!" << endl;
+			cout << endl;
+			cout << "Deseja ver os dados?" << endl;
+			cout <<"1- Sim" << endl;
+			cout <<"2- Nao" << endl;
+			cin >> resposta;
+			
+			if(resposta ==1){
+				system("cls");
+				resposta =0;
+				saida(exoticos,tamanho,erro);
+				cout << endl;
+				cout << "Deseja voltar ao menu principal?"<< endl;
+				cout << "1 - Sim" << endl;
+				cout << "2 - Nao" << endl;
+				cin >> resposta;
+		
+				if(resposta ==1){
+					system("cls");
+					menu(exoticos,tamanho,erro);
+				}
+				else if(resposta == 2){
+				exit(2);
+				}
+				else{
+				erro = true;
+				}
+			}
+			else if(resposta == 2){
+				system("cls");
+				resposta =0;
+				cout << "Deseja voltar ao menu principal?"<< endl;
+				cout << "1 - Sim" << endl;
+				cout << "2 - Nao" << endl;
+				cin >> resposta;
+				
+					if(resposta ==1){
+						system("cls");
+						menu(exoticos,tamanho,erro);
+					}
+					else if(resposta == 2){
+						exit(2);
+					}
+					else{
+						erro = true;
+					}
+			}
+			else{// caso de erro
+				erro = true;
+			}
+			
+				
+		}
+		else if(resposta == 2){//ordenar por nome do animal
+		}
+		else{// caso de erro
+			erro = true;
+		}
+	}
+	else if(n==5){ //caso de encerramento do programa
 		exit(5);
 	}
 	else{ //caso de erro
@@ -182,7 +270,8 @@ int main(){
 	menu(exoticos,tamanho,erro);
 	
 	int resposta;
-	while(erro == 0){ //repetiçao do erro
+	while(erro == true){ //repetiçao do erro
+		system("cls");
 		cout << "Nao existe essa opcao no programa" << endl;
 		cout << endl;
 		cout << "Deseja voltar ao menu principal?"<< endl;
