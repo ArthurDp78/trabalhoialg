@@ -165,10 +165,11 @@ void quicksortNome(animais* exoticos, int pos_pivo, int fim) {
 void saida(animais* exoticos, int tamanho,bool &erro){
 	cout << "Voce deseja mostrar todos os dados?"<< endl;
 	cout << "1 - Sim"<< endl;
-	cout << "2- Nao" << endl;
+	cout << "2 - Nao" << endl;
 	
 	int resposta=0;
 	cin >> resposta;
+	system("cls");
 	if(resposta == 1){
 		for(int k = 0; k<tamanho; k++){
 			cout << exoticos[k].identificador << ",";
@@ -210,21 +211,22 @@ void adcionarArquivo(animais* exoticos,int &tamanho){
 	for (int g=0;g<tamanho;g++){
 		saida << exoticos[g].identificador << "," << exoticos[g].nome << "," << exoticos[g].pais << "," << exoticos[g].classe << "," << exoticos[g].vida << endl;
 		}
+		
 	
 }
 
 void adcionar(animais* exoticos,int &tamanho){
 	for (int i=0;i<tamanho+1;i++){
-		cout << "Adcionar identificador: ";
+		cout << "Adicionar identificador: ";
 		cin >> exoticos[i].identificador;
-		cout << "Adcionar nome: ";
+		cout << "Adicionar nome: ";
 		getline(cin,exoticos[i].nome);
-		cout << "Adcionar pais de origem: ";
+		cout << "Adicionar pais de origem: ";
 		getline(cin,exoticos[i].pais);
 		cin >> exoticos[i].pais;
-		cout << "Adcionar classe: ";
+		cout << "Adicionar classe: ";
 		cin >> exoticos[i].classe;
-		cout << "Adcionar tempo de vida: ";
+		cout << "Adicionar tempo de vida: ";
 		cin >> exoticos[i].vida;
 		}	
 }
@@ -233,11 +235,11 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 	int n;
 	int resposta=0;
 	cout << "O que deseja fazer?" << endl;
-	cout << "1- Mostrar os dados do existentes no programa" << endl;
-	cout << "2- Adicionar dados no programa" << endl;
-	cout << "3- Ordenar os dados" << endl;
-	cout << "4- Adcionar dados ao arquivo" << endl;
-	cout << "0- Sair do programa" << endl;
+	cout << "1 - Mostrar os dados do existentes no programa" << endl;
+	cout << "2 - Adicionar dados no programa" << endl;
+	cout << "3 - Ordenar os dados" << endl;
+	cout << "4 - Adicionar dados ao arquivo" << endl;
+	cout << "0 - Sair do programa" << endl;
 	cin >> n;
 	
 	
@@ -265,7 +267,7 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 		}
 	else if(n==3){ // ordenar o vetor 
 		cout <<"Deseja ordenar por identificador ou por nome do animal?"<< endl;
-		cout << "1- Identificador" << endl;
+		cout << "1 - Identificador" << endl;
 		cout << "2 - Nome"<< endl;
 		cin >> resposta;
 		
@@ -334,8 +336,8 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 			cout << endl;
 			
 			cout << "Deseja ver os dados?" << endl;
-			cout <<"1- Sim" << endl;
-			cout <<"2- Nao" << endl;
+			cout <<"1 - Sim" << endl;
+			cout <<"2 - Nao" << endl;
 			cin >> resposta;
 			
 			if(resposta ==1){
@@ -430,7 +432,7 @@ int main(){
 	animais* exoticos = new animais[40];
 	
 	leitura(arquivo,exoticos,tamanho);
-	
+
 	menu(exoticos,tamanho,erro);
 	
 	int resposta;
