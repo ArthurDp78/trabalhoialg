@@ -10,7 +10,7 @@ struct animais{
 	string nome;
 	string pais;
 	string classe;
-	short vida;
+	short vida;	
 };
 
 void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
@@ -82,6 +82,33 @@ void quicksortIdent(animais* exoticos, int pos_pivo, int fim) {
       quicksortIdent(exoticos, pos_novo_pivo + 1, fim); 
    }
 }	
+
+
+int particionaNome(animais* exoticos, int c, int f) { 
+   int i = c+1, j = f;
+   string pivo = exoticos[c].nome;
+   while (i <= j) {
+       if (exoticos[i].nome <= pivo) i++;
+       else if (pivo <= exoticos[j].nome) j--; 
+       else { 
+           swap (exoticos[i],exoticos[j]);
+           i++;
+           j--;
+       }
+   }                
+   exoticos[c].nome = exoticos[j].nome;
+   exoticos[j].nome = pivo;
+   return j; 
+}
+void quicksortNome(animais* exoticos, int pos_pivo, int fim) {
+   int pos_novo_pivo;         
+   if (pos_pivo < fim) {  
+      pos_novo_pivo = particionaNome(exoticos, pos_pivo, fim);
+      quicksortNome(exoticos, pos_pivo, pos_novo_pivo - 1); 
+      quicksortNome(exoticos, pos_novo_pivo + 1, fim); 
+   }
+}	
+
 
 void saida(animais* exoticos, int tamanho,bool &erro){
 	cout << "Voce deseja mostrar todos os dados?"<< endl;
@@ -178,7 +205,7 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 	else if(n==3){ // ordenar o vetor 
 		cout <<"Deseja ordenar por identificador ou por nome do animal?"<< endl;
 		cout << "1- Identificador" << endl;
-		cout << "2 - Nome do Animal"<< endl;
+		cout << "2 - Nome"<< endl;
 		cin >> resposta;
 		
 		if(resposta == 1){//ordenar por identificador
@@ -187,6 +214,7 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 			system("cls");
 			cout << "Os dados foram ordenados por identificador!" << endl;
 			cout << endl;
+			
 			cout << "Deseja ver os dados?" << endl;
 			cout <<"1- Sim" << endl;
 			cout <<"2- Nao" << endl;
@@ -235,10 +263,63 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 			else{// caso de erro
 				erro = true;
 			}
-			
 				
 		}
 		else if(resposta == 2){//ordenar por nome do animal
+			resposta = 0;
+			quicksortNome(exoticos,0,tamanho-1);
+			system("cls");
+			cout << "Os dados foram ordenados por nome!" << endl;
+			cout << endl;
+			
+			cout << "Deseja ver os dados?" << endl;
+			cout <<"1- Sim" << endl;
+			cout <<"2- Nao" << endl;
+			cin >> resposta;
+			
+			if(resposta ==1){
+				system("cls");
+				resposta =0;
+				saida(exoticos,tamanho,erro);
+				cout << endl;
+				cout << "Deseja voltar ao menu principal?"<< endl;
+				cout << "1 - Sim" << endl;
+				cout << "2 - Nao" << endl;
+				cin >> resposta;
+		
+				if(resposta ==1){
+					system("cls");
+					menu(exoticos,tamanho,erro);
+				}
+				else if(resposta == 2){
+				exit(2);
+				}
+				else{
+				erro = true;
+				}
+			}
+			else if(resposta == 2){
+				system("cls");
+				resposta =0;
+				cout << "Deseja voltar ao menu principal?"<< endl;
+				cout << "1 - Sim" << endl;
+				cout << "2 - Nao" << endl;
+				cin >> resposta;
+				
+					if(resposta ==1){
+						system("cls");
+						menu(exoticos,tamanho,erro);
+					}
+					else if(resposta == 2){
+						exit(2);
+					}
+					else{
+						erro = true;
+					}
+			}
+			else{// caso de erro
+				erro = true;
+			}
 		}
 		else{// caso de erro
 			erro = true;
