@@ -388,7 +388,7 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 			erro = true;
 		}
 	}
-	else if(n==4){
+	else if(n==4){ //salvar alterações no arquivo
 		resposta=0;
 		adcionarArquivo(exoticos,tamanho);
 		system("cls");
