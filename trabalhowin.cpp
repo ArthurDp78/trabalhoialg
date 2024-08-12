@@ -209,7 +209,7 @@ void adcionarArquivo(animais* exoticos,int &tamanho){
 	ofstream saida("animais.csv");
 	saida << "# identificador; nome; país; classe; tempo de vida" << endl;
 	for (int g=0;g<tamanho;g++){
-		saida << exoticos[g].identificador << "," << exoticos[g].nome << "," << exoticos[g].pais << "," << exoticos[g].classe << "," << exoticos[g].vida << endl;
+		saida << exoticos[g].identificador << "," << exoticos[g].nome << "," << exoticos[g].pais << "," << exoticos[g].classe << " ," << exoticos[g].vida << endl;
 		}
 		
 	
