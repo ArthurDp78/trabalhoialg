@@ -247,18 +247,20 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 	system("cls");
 	if(n == 1){    //caso de saida
 		saida(exoticos,tamanho,erro);
-		cout << endl;
-		cout << "Deseja voltar ao menu principal?"<< endl;
-		cout << "1 - Sim" << endl;
-		cout << "2 - Nao" << endl;
-		
-		cin >> resposta;
-		
-		if(resposta ==1){
-		system("cls");
-		menu(exoticos,tamanho,erro);
+		if (erro == false){
+			cout << endl;
+			cout << "Deseja voltar ao menu principal?"<< endl;
+			cout << "1 - Sim" << endl;
+			cout << "2 - Nao" << endl;
+			
+			cin >> resposta;
+			
+			if(resposta ==1){
+			system("cls");
+			menu(exoticos,tamanho,erro);
+			}
+		}
 	}
-}
 	else if(n == 2){	   //caso de adição de animais
 		adcionar(exoticos,tamanho);
 		system("cls");
