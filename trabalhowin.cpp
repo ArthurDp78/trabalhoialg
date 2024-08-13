@@ -434,7 +434,7 @@ int main(){
 	animais* exoticos = new animais[40];
 	
 	leitura(arquivo,exoticos,tamanho);
-
+	arquivo.close();
 	menu(exoticos,tamanho,erro);
 	
 	int resposta;
