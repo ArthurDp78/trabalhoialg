@@ -1,5 +1,5 @@
 # identificador; nome; país; classe; tempo de vida
-1,Aye-Aye,Madagascar,Mamifero ,23 
+1,Aye-Aye,Madagascar,Mamifero ,23
 2,Kakapo,Nova Zelandia,Aves ,60
 3,Narval,Artico,Mamifero ,60
 4,Okapi,Republica Democratica do Congo,Mamifero ,20
@@ -31,7 +31,7 @@
 30,Morcego-vampiro,America Latina,Mamifero ,9
 31,Cacatua-negra,Indonesia,Aves ,40
 32,Peixe-dragao,Oceano Pacifico,Peixe ,5
-33,Iaque,Nepal,Mamifero ,20
+33,Iaque,Nepal,Mamifero ,25
 34,Gecko-leopardo,Asia Central,Reptil ,20
 35,Lynx,Europa,Mamifero ,15
 36,Manati,America do Sul,Mamifero ,60
@@ -49,5 +49,53 @@
 48,Tigre-siberiano,Russia,Mamifero ,20
 49,Robalo-azul,Oceano Pacifico,Peixe ,20
 50,Olingo,America Central,Mamifero ,15
-
-
+51,Galo dagua,Asia,Aves ,10
+52,Naja,Asia,Reptil ,20
+53,Leopardo-nebuloso,Asia,Mamifero ,10
+54,Rinoceronte-de-Javan,Indonesia,Mamifero ,45
+55,Muriqui,Brasil,Mamifero ,30
+56,Peixe-bolha,Oceano Pacifico,Peixe ,20
+57,Gerenuk,Africa Oriental,Mamifero ,15
+58,Tamarin-de-mascara-dourada,Brasil,Mamifero ,15
+59,Ornitorrinco,Australia,Mamifero ,17
+60,Lemure-de-areia,Madagascar,Mamifero ,12
+61,Aguia-harpyia,America Central e do Sul,Aves ,35
+62,Camarao-fantasma,Oceano Atlantico,Crustaceos ,3
+63,Rinoceronte-indiano,India,Mamifero ,45
+64,Bufalo-anao,Africa Central,Mamifero ,20
+65,Cuscuz,Australia,Mamifero ,15
+66,Tamandua-mexicano,Mexico,Mamifero ,15
+67,Sapo-dourado,Panama,Anfibio ,15
+68,Lobo-guara,America do Sul,Mamifero ,15
+69,Falcao-peregrino,Global,Aves ,20
+70,Galo-de-campina,Brasil,Aves ,15
+71,Tigre-de-bengala,India,Mamifero ,15
+72,Salamandra-de-fogo,Europa,Anfibio ,20
+73,Bufalo-asiAtico,Sudeste Asiatico,Mamifero ,25
+74,Tucano-de-bico-preto,America Central e do Sul,Aves ,20
+75,Cervo-mule,America do Norte,Mamifero ,15
+76,Lobo-marinho-de-galapagos,Equador,Mamifero ,20
+77,Curassow-de-bico-amarelo,America Central,Aves ,20
+78,Dromedario,Norte da Africa,Mamifero ,40
+79,Lagarto-comum,America Central,Reptil ,7
+80,Canguru-vermelho,Australia,Mamifero ,12
+81,Slow Loris,Asia,Primata ,25
+82,Anta,America do Sul e Central,Mamifero ,30
+83,Centopeia,Amazonia,Insecta ,6
+84,Macaco-japones,Japao,Primata ,25
+85,Boto-cor-de-rosa,Rio Amazonas,Mamifero ,30
+86,Ligre,Cativeiro,Mamifero ,15
+87,Macaco-Narigudo,Borneu,Primata ,15
+88,Veado-de-penacho,America do Sul,Mamifero ,15
+89,Toupeira-nariz-de-estrela,America do Norte,Mamifero ,4
+90,Lagosta-boxeadora,Oceano Pacifico,Crustaceo ,10
+91,Lesma-do-mar-azul,Oceanos Tropicais,Moluscos ,2
+92,Polvo-dumbo,Oceanos Profundos,Cefalopodes ,5
+93,Atelopus,America do Sul,Anfibio ,18
+94,Pato-mandarim,China,Ave ,10
+95,Gafanhoto Cor-de-rosa,America Central e do Sul,Insecta ,1
+96,Papagaio-cara-suja,America Central e do Sul,Aves ,40
+97,Agama-de-dentes-de-sabre,Africa Oriental,Reptil ,15
+98,Peixe-borboleta,Oceanos Tropicais,Peixe ,10
+99,Camaleao-pantera,Madagascar,Reptil ,7
+100,Sapo-de-barriga-azul,China,Anfibio ,15
