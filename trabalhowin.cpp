@@ -12,7 +12,7 @@ struct animais{
 	short vida;	
 };
 
-void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
+animais* leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 	char lixo;
 	int i=0;
 	while(arquivo){
@@ -57,6 +57,7 @@ void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 		i++;
 	}	
 	tamanho = i-1;
+	return exoticos;
 }
 int particionaIdent(animais* exoticos, int c, int f) { 
 	int pivo = exoticos[c].identificador, i = c+1, j = f;
@@ -162,7 +163,7 @@ void quicksortNome(animais* exoticos, int pos_pivo, int fim) {
 }	
 
 
-void saida(animais* exoticos, int tamanho,bool &erro){
+void saida(animais* exoticos, int &tamanho,bool &erro){
 	cout << "Voce deseja mostrar todos os dados?"<< endl;
 	cout << "1 - Sim"<< endl;
 	cout << "2 - Nao" << endl;
@@ -211,14 +212,13 @@ void adcionarArquivo(animais* exoticos,int &tamanho){
 	for (int g=0;g<tamanho;g++){
 		saida << exoticos[g].identificador << "," << exoticos[g].nome << "," << exoticos[g].pais << "," << exoticos[g].classe << " ," << exoticos[g].vida << endl;
 		}
-		
-	
 }
 
 void adcionar(animais* exoticos,int &tamanho){
 	for (int i=0;i<tamanho+1;i++){
 		cout << "Adicionar identificador: ";
 		cin >> exoticos[i].identificador;
+		cin.ignore();
 		cout << "Adicionar nome: ";
 		getline(cin,exoticos[i].nome);
 		cout << "Adicionar pais de origem: ";
@@ -433,7 +433,7 @@ int main(){
 	
 	animais* exoticos = new animais[40];
 	
-	leitura(arquivo,exoticos,tamanho);
+	exoticos = leitura(arquivo,exoticos,tamanho);
 	arquivo.close();
 	menu(exoticos,tamanho,erro);
 	
