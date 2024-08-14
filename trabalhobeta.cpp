@@ -213,6 +213,87 @@ void adcionarArquivo(animais* exoticos,int &tamanho){
 		saida << exoticos[g].identificador << "," << exoticos[g].nome << "," << exoticos[g].pais << "," << exoticos[g].classe << " ," << exoticos[g].vida << endl;
 		}
 }
+int BuscaBinariaIdent(animais* vetor, int inicio, int fim, int procurado) {     
+    if (inicio <= fim){
+        int meio = (inicio+fim)/2;
+        if (procurado > vetor[meio].identificador)
+            return BuscaBinariaIdent(vetor,meio+1,fim,procurado);
+        else if (procurado < vetor[meio].identificador)
+            return BuscaBinariaIdent(vetor,inicio,meio-1,procurado);
+        else
+            return meio;
+    }
+    return -1;
+}
+
+int BuscaBinariaNome(animais* vetor, int inicio, int fim, string procurado) {     
+    if (inicio <= fim){
+        int meio = (inicio+fim)/2;
+        if (procurado > vetor[meio].nome)
+            return BuscaBinariaNome(vetor,meio+1,fim,procurado);
+        else if (procurado < vetor[meio].nome)
+            return BuscaBinariaNome(vetor,inicio,meio-1,procurado);
+        else
+            return meio;
+    }
+    return -1;
+}
+
+
+void Buscar(animais* exoticos,int &tamanho,bool &erro){
+	int resposta;
+	cout << "Deseja buscar por identificador ou por nome ? " << endl << endl;
+	cout << "1 - Identificador" << endl;
+	cout << "2 - Nome" << endl;
+	cin >> resposta;
+	system("cls");
+	if (resposta == 1){
+		quicksortIdent(exoticos,0,tamanho-1);
+		cout << "Qual identificador deseja buscar ? ";
+		int num;
+		cin >> num;
+		cout << endl;
+		int position;
+		position = BuscaBinariaIdent(exoticos,0,tamanho-1,num);
+		if ( position != -1){
+		cout << exoticos[position].identificador << ",";
+		cout << exoticos[position].nome << "," ;
+		cout << exoticos[position].pais << "," ;
+		cout << exoticos[position].classe << ",";
+		cout << exoticos[position].vida << endl;
+		cout << endl;
+			}
+		else {
+			cout << "Nao existe esse identificador no arquivo!" << endl << endl;
+			erro = true;
+			}
+	}
+	else if (resposta == 2){
+		quicksortNome(exoticos,0,tamanho-1);
+		cout << "Qual nome deseja buscar ? ";
+		string name;
+		cin.ignore();
+		
+		getline(cin,name);
+		cout << endl;
+		int positionNome;
+		positionNome = BuscaBinariaNome(exoticos,0,tamanho-1,name);
+		if (positionNome != -1){
+			cout << exoticos[positionNome].identificador << ",";
+			cout << exoticos[positionNome].nome << "," ;
+			cout << exoticos[positionNome].pais << "," ;
+			cout << exoticos[positionNome].classe << ",";
+			cout << exoticos[positionNome].vida << endl << endl;
+		}
+		else {
+			cout << "Nao existe esse animal no arquivo!" << endl << endl;
+			erro = true;
+			}
+		}
+	else {
+		erro = true;
+		}
+	}
 
 animais* adcionar(animais* exoticos,int &tamanho,bool &erro){
 	int quantidade;
@@ -255,7 +336,7 @@ animais* adcionar(animais* exoticos,int &tamanho,bool &erro){
 	system("cls");
 	if (resposta == 1){
 		resposta = 0;
-		cout <<"Deseja ordenar por identificador ou por nome do animal?"<< endl;
+		cout <<"Deseja ordenar por identificador ou por nome do animal?"<< endl << endl;
 		cout << "1 - Identificador" << endl;
 		cout << "2 - Nome"<< endl;
 		cin >> resposta;
@@ -278,11 +359,12 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 	system("cls");
 	int n;
 	int resposta=0;
-	cout << "O que deseja fazer?" << endl;
+	cout << "O que deseja fazer?" << endl << endl;
 	cout << "1 - Mostrar os dados do existentes no programa" << endl;
 	cout << "2 - Adicionar dados no programa" << endl;
 	cout << "3 - Ordenar os dados" << endl;
 	cout << "4 - Adicionar dados ao arquivo" << endl;
+	cout << "5 - Buscar" << endl;
 	cout << "0 - Sair do programa" << endl;
 	cin >> n;
 	
@@ -309,6 +391,7 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 		resposta = 0;
 		exoticos = adcionar(exoticos,tamanho,erro);
 		system("cls");
+		cout << "Dados atualizados com sucesso!" << endl << endl;
 		cout << "Deseja voltar ao menu ? " << endl;
 		cout << "1 - Sim" << endl;
 		cout << "2 - Nao" << endl;
@@ -326,7 +409,7 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 			}
 		}	
 	else if(n==3){ // ordenar o vetor 
-		cout <<"Deseja ordenar por identificador ou por nome do animal?"<< endl;
+		cout <<"Deseja ordenar por identificador ou por nome do animal?"<< endl << endl;
 		cout << "1 - Identificador" << endl;
 		cout << "2 - Nome"<< endl;
 		cin >> resposta;
@@ -467,6 +550,25 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 			}
 		else {
 			erro = true;
+			}
+		}
+	else if(n==5){
+		Buscar(exoticos,tamanho,erro);
+		if (erro == false){
+			cout << "Deseja voltar ao menu principal?"<< endl;
+			cout << "1 - Sim" << endl;
+			cout << "2 - Nao" << endl;
+			cin >> resposta;
+			if(resposta ==1){
+				system("cls");
+				menu(exoticos,tamanho,erro);
+				}
+			else if(resposta == 2){
+				exit(2);
+				}
+			else{
+				erro = true;
+				}
 			}
 		}
 	
