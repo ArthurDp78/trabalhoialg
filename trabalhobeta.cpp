@@ -355,7 +355,13 @@ animais* adcionar(animais* exoticos,int &tamanho,bool &erro){
 		}
 	return exoticos;
 }
-void menu(animais*exoticos, int tamanho,bool &erro){
+
+void Delete(animais* exoticos;int &tamanho;bool &erro){
+	int numeroDel;
+	cout << "Deseja deletar por identificador ou por nome ?"
+	}
+
+void menu(animais* exoticos, int tamanho,bool &erro){
 	system("cls");
 	int n;
 	int resposta=0;
@@ -365,6 +371,7 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 	cout << "3 - Ordenar os dados" << endl;
 	cout << "4 - Adicionar dados ao arquivo" << endl;
 	cout << "5 - Buscar" << endl;
+	cout << "6 - Deletar dado" << endl;
 	cout << "0 - Sair do programa" << endl;
 	cin >> n;
 	
@@ -552,7 +559,7 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 			erro = true;
 			}
 		}
-	else if(n==5){
+	else if(n==5){  //Buscar dados dentro do arquivo
 		Buscar(exoticos,tamanho,erro);
 		if (erro == false){
 			cout << "Deseja voltar ao menu principal?"<< endl;
@@ -570,6 +577,9 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 				erro = true;
 				}
 			}
+		}
+	else if(n==6){ //deletar dados
+		Delete(exotico,tamanho,erro);
 		}
 	
 	else if(n==0){ //caso de encerramento do programa
@@ -592,7 +602,7 @@ int main(){
 	
 	
 	animais* exoticos = new animais[40];
-	
+		
 	exoticos = leitura(arquivo,exoticos,tamanho);
 	arquivo.close();
 	menu(exoticos,tamanho,erro);
