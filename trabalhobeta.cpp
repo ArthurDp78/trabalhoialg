@@ -12,7 +12,7 @@ struct animais{
 	short vida;	
 };
 
-void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
+animais* leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 	char lixo;
 	int i=0;
 	while(arquivo){
@@ -57,17 +57,24 @@ void leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 		i++;
 	}	
 	tamanho = i-1;
+	return exoticos;
 }
 int particionaIdent(animais* exoticos, int c, int f) { 
-   int pivo = exoticos[c].identificador, i = c+1, j = f;
+	int pivo = exoticos[c].identificador, i = c+1, j = f;
+	
+	short auxvida;
+	string auxclasse;
+	string auxpais;
+	string auxnome;
+	
    while (i <= j) {
        if (exoticos[i].identificador <= pivo) i++;
        else if (pivo <= exoticos[j].identificador) j--; 
-       else {
+       else { 
            swap (exoticos[i].nome,exoticos[j].nome);
+           swap (exoticos[i].classe,exoticos[j].classe);
            swap (exoticos[i].identificador,exoticos[j].identificador);
            swap (exoticos[i].pais,exoticos[j].pais);
-           swap (exoticos[i].classe,exoticos[j].classe);
            swap (exoticos[i].vida,exoticos[j].vida);
            i++;
            j--;
@@ -75,6 +82,23 @@ int particionaIdent(animais* exoticos, int c, int f) {
    }                
    exoticos[c].identificador = exoticos[j].identificador;
    exoticos[j].identificador = pivo;
+   
+   
+	auxnome = exoticos[c].nome;
+	auxvida = exoticos[c].vida;
+	auxclasse = exoticos[c].classe;
+	auxpais = exoticos[c].pais;
+   
+	exoticos[c].nome = exoticos[j].nome;
+	exoticos[c].vida = exoticos[j].vida;
+	exoticos[c].classe = exoticos[j].classe;
+	exoticos[c].pais = exoticos[j].pais;
+	
+	exoticos[j].nome = auxnome;
+	exoticos[j].vida = auxvida;
+	exoticos[j].classe = auxclasse;
+	exoticos[j].pais = auxpais;
+	
    return j; 
 }
 void quicksortIdent(animais* exoticos, int pos_pivo, int fim) {
@@ -90,21 +114,43 @@ void quicksortIdent(animais* exoticos, int pos_pivo, int fim) {
 int particionaNome(animais* exoticos, int c, int f) { 
    int i = c+1, j = f;
    string pivo = exoticos[c].nome;
+   
+   int auxident;
+   short auxvida;
+   string auxclasse;
+   string auxpais;
+   
    while (i <= j) {
        if (exoticos[i].nome <= pivo) i++;
        else if (pivo <= exoticos[j].nome) j--; 
        else { 
            swap (exoticos[i].nome,exoticos[j].nome);
+           swap (exoticos[i].classe,exoticos[j].classe);
            swap (exoticos[i].identificador,exoticos[j].identificador);
            swap (exoticos[i].pais,exoticos[j].pais);
-           swap (exoticos[i].classe,exoticos[j].classe);
            swap (exoticos[i].vida,exoticos[j].vida);
            i++;
            j--;
        }
    }                
-   exoticos[c].nome = exoticos[j].nome;
-   exoticos[j].nome = pivo;
+	exoticos[c].nome = exoticos[j].nome;
+	exoticos[j].nome = pivo;
+   
+	auxident = exoticos[c].identificador;
+	auxvida = exoticos[c].vida;
+	auxclasse = exoticos[c].classe;
+	auxpais = exoticos[c].pais;
+   
+	exoticos[c].identificador = exoticos[j].identificador;
+	exoticos[c].vida = exoticos[j].vida;
+	exoticos[c].classe = exoticos[j].classe;
+	exoticos[c].pais = exoticos[j].pais;
+	
+	exoticos[j].identificador = auxident;
+	exoticos[j].vida = auxvida;
+	exoticos[j].classe = auxclasse;
+	exoticos[j].pais = auxpais;
+	
    return j; 
 }
 void quicksortNome(animais* exoticos, int pos_pivo, int fim) {
@@ -117,13 +163,14 @@ void quicksortNome(animais* exoticos, int pos_pivo, int fim) {
 }	
 
 
-void saida(animais* exoticos, int tamanho,bool &erro){
+void saida(animais* exoticos, int &tamanho,bool &erro){
 	cout << "Voce deseja mostrar todos os dados?"<< endl;
 	cout << "1 - Sim"<< endl;
-	cout << "2- Nao" << endl;
+	cout << "2 - Nao" << endl;
 	
 	int resposta=0;
 	cin >> resposta;
+	system("cls");
 	if(resposta == 1){
 		for(int k = 0; k<tamanho; k++){
 			cout << exoticos[k].identificador << ",";
@@ -163,37 +210,80 @@ void adcionarArquivo(animais* exoticos,int &tamanho){
 	ofstream saida("animais.csv");
 	saida << "# identificador; nome; país; classe; tempo de vida" << endl;
 	for (int g=0;g<tamanho;g++){
-		saida << exoticos[g].identificador << "," << exoticos[g].nome << "," << exoticos[g].pais << "," << exoticos[g].classe << "," << exoticos[g].vida << endl;
+		saida << exoticos[g].identificador << "," << exoticos[g].nome << "," << exoticos[g].pais << "," << exoticos[g].classe << " ," << exoticos[g].vida << endl;
 		}
-	cout << "Arquivos adcionados com sucesso!";
-	
 }
 
-void adcionar(animais* exoticos,int &tamanho){
-	for (int i=0;i<tamanho+1;i++){
-		cout << "Adcionar identificador: ";
+animais* adcionar(animais* exoticos,int &tamanho,bool &erro){
+	int quantidade;
+	cout << "Quantos animais voce quer adcionar ? ";
+	cin >> quantidade;
+	system("cls");
+	animais* array = new animais[tamanho+quantidade];
+	for(int j=0; j < tamanho; j++){
+				array[j].identificador = exoticos[j].identificador;
+				array[j].nome = exoticos[j].nome;
+				array[j].pais = exoticos[j].pais;
+				array[j].classe = exoticos[j].classe;
+				array[j].vida = exoticos[j].vida;
+			}
+	
+	delete[] exoticos;
+	exoticos = array;
+	
+	for (int i=tamanho;i<tamanho+quantidade;i++){
+		cout << "Adicionar identificador(inteiro): ";
 		cin >> exoticos[i].identificador;
-		cout << "Adcionar nome: ";
+		cin.ignore();
+		cout << "Adicionar nome(String): ";
 		getline(cin,exoticos[i].nome);
-		cout << "Adcionar pais de origem: ";
+		cout << "Adicionar pais de origem(String): ";
 		getline(cin,exoticos[i].pais);
-		cin >> exoticos[i].pais;
-		cout << "Adcionar classe: ";
+		cout << "Adicionar classe(String): ";
 		cin >> exoticos[i].classe;
-		cout << "Adcionar tempo de vida: ";
+		cout << "Adicionar tempo de vida(short): ";
 		cin >> exoticos[i].vida;
 		}	
+	tamanho = tamanho+quantidade;
+	system("cls");
+	int resposta;
+	cout << "Dados adicionados com sucesso!" << endl << endl;
+	cout << "Deseja ordenar os animais adcionados? "<< endl;
+	cout << "1 - Sim" << endl;
+	cout << "2 - Nao" << endl;
+	cin >> resposta;
+	system("cls");
+	if (resposta == 1){
+		resposta = 0;
+		cout <<"Deseja ordenar por identificador ou por nome do animal?"<< endl;
+		cout << "1 - Identificador" << endl;
+		cout << "2 - Nome"<< endl;
+		cin >> resposta;
+		if (resposta == 1){
+			resposta = 0;
+			quicksortIdent(exoticos,0,tamanho-1);
+			}
+		else if(resposta == 2){
+			resposta = 0;
+			quicksortNome(exoticos,0,tamanho-1);
+			}
+		else {
+			resposta = 0;
+			erro = true;
+			}
+		}
+	return exoticos;
 }
 void menu(animais*exoticos, int tamanho,bool &erro){
 	system("cls");
 	int n;
 	int resposta=0;
 	cout << "O que deseja fazer?" << endl;
-	cout << "1- Mostrar os dados do existentes no programa" << endl;
-	cout << "2- Adicionar dados no programa" << endl;
-	cout << "3- Ordenar os dados" << endl;
-	cout << "4- Adcionar dados ao arquivo" << endl;
-	cout << "0- Sair do programa" << endl;
+	cout << "1 - Mostrar os dados do existentes no programa" << endl;
+	cout << "2 - Adicionar dados no programa" << endl;
+	cout << "3 - Ordenar os dados" << endl;
+	cout << "4 - Adicionar dados ao arquivo" << endl;
+	cout << "0 - Sair do programa" << endl;
 	cin >> n;
 	
 	
@@ -201,27 +291,43 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 	system("cls");
 	if(n == 1){    //caso de saida
 		saida(exoticos,tamanho,erro);
-		cout << endl;
-		cout << "Deseja voltar ao menu principal?"<< endl;
+		if (erro == false){
+			cout << endl;
+			cout << "Deseja voltar ao menu principal?"<< endl;
+			cout << "1 - Sim" << endl;
+			cout << "2 - Nao" << endl;
+			
+			cin >> resposta;
+			
+			if(resposta ==1){
+			system("cls");
+			menu(exoticos,tamanho,erro);
+			}
+		}
+	}
+	else if(n == 2){	   //caso de adição de animais
+		resposta = 0;
+		exoticos = adcionar(exoticos,tamanho,erro);
+		system("cls");
+		cout << "Deseja voltar ao menu ? " << endl;
 		cout << "1 - Sim" << endl;
 		cout << "2 - Nao" << endl;
-		
 		cin >> resposta;
-		
-		if(resposta ==1){
-		system("cls");
-		menu(exoticos,tamanho,erro);
-	}
-}
-	else if(n == 2){	   //caso de adição de animais
-		adcionar(exoticos,tamanho);
-		system("cls");
-		menu(exoticos,tamanho,erro);
-		
-		}
+		if (resposta == 1){
+			resposta=0;
+			menu(exoticos,tamanho,erro);
+			}
+		else if (resposta == 2){
+			exit(2);
+			}
+		else {
+			resposta = 0;
+			erro = true;
+			}
+		}	
 	else if(n==3){ // ordenar o vetor 
 		cout <<"Deseja ordenar por identificador ou por nome do animal?"<< endl;
-		cout << "1- Identificador" << endl;
+		cout << "1 - Identificador" << endl;
 		cout << "2 - Nome"<< endl;
 		cin >> resposta;
 		
@@ -290,8 +396,8 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 			cout << endl;
 			
 			cout << "Deseja ver os dados?" << endl;
-			cout <<"1- Sim" << endl;
-			cout <<"2- Nao" << endl;
+			cout <<"1 - Sim" << endl;
+			cout <<"2 - Nao" << endl;
 			cin >> resposta;
 			
 			if(resposta ==1){
@@ -342,10 +448,12 @@ void menu(animais*exoticos, int tamanho,bool &erro){
 			erro = true;
 		}
 	}
-	else if(n==4){
+	else if(n==4){ //salvar alterações no arquivo
 		resposta=0;
 		adcionarArquivo(exoticos,tamanho);
 		system("cls");
+		cout << "Arquivos adicionados com sucesso!"<< endl;
+		cout << endl;
 		cout << "Deseja voltar ao menu ?" << endl;
 		cout << "1 - Sim" << endl;
 		cout << "2 - Nao" << endl;
@@ -383,8 +491,8 @@ int main(){
 	
 	animais* exoticos = new animais[40];
 	
-	leitura(arquivo,exoticos,tamanho);
-	
+	exoticos = leitura(arquivo,exoticos,tamanho);
+	arquivo.close();
 	menu(exoticos,tamanho,erro);
 	
 	int resposta;
