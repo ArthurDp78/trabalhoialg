@@ -167,7 +167,6 @@ void saida(animais* exoticos, int &tamanho,bool &erro){
 	cout << "Voce deseja mostrar todos os dados?"<< endl;
 	cout << "1 - Sim"<< endl;
 	cout << "2 - Nao" << endl;
-	cout << tamanho << endl;
 	int resposta=0;
 	cin >> resposta;
 	system("cls");
@@ -358,6 +357,7 @@ animais* adcionar(animais* exoticos,int &tamanho,bool &erro){
 
 animais* Delete(animais* exoticos,int &tamanho,bool &erro){
 	int n;
+	cout << "Qual identificador deseja deletar ? ";
 	cin >> n;
 	int posicao;
 	for(int i=0; i< tamanho; i++){
@@ -546,6 +546,7 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 				cin >> resposta;
 				
 					if(resposta ==1){
+						resposta = 0;
 						system("cls");
 						menu(exoticos,tamanho,erro);
 					}
@@ -553,6 +554,7 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 						exit(2);
 					}
 					else{
+						resposta = 0;
 						erro = true;
 					}
 			}
@@ -565,27 +567,59 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 		}
 	}
 	else if(n==4){ //salvar alterações no arquivo
+		fstream arquivo("animais.csv");
 		resposta=0;
-		adcionarArquivo(exoticos,tamanho);
-		system("cls");
-		cout << "Arquivos adicionados com sucesso!"<< endl;
-		cout << endl;
-		cout << "Deseja voltar ao menu ?" << endl;
-		cout << "1 - Sim" << endl;
-		cout << "2 - Nao" << endl;
-		cin >> resposta;
-		if (resposta == 1){
-			resposta=0;
-			menu(exoticos,tamanho,erro);
+		cout << "Deseja adcionar ao .csv ou ao arquivo binario ? " << endl;
+		cout << "1 - .csv" << endl;
+		cout << "2 - Arquivo binario" << endl << endl;
+		int adiciona;
+		cin >> adiciona;
+		if (adiciona == 1){
+			adcionarArquivo(exoticos,tamanho);
+			system("cls");
+			cout << "Arquivos adicionados com sucesso!"<< endl;
+			cout << endl;
+			cout << "Deseja voltar ao menu ?" << endl;
+			cout << "1 - Sim" << endl;
+			cout << "2 - Nao" << endl;
+			cin >> resposta;
+			if (resposta == 1){
+				resposta=0;
+				menu(exoticos,tamanho,erro);
+				}
+			else if (resposta == 2){
+				exit(2);
+				}
+			else {
+				erro = true;
+				}
 			}
-		else if (resposta == 2){
-			exit(2);
-			}
-		else {
-			erro = true;
+		else if (adiciona == 2){
+			ofstream arqBinary("animais2",ios::binary);
+			arqBinary.write((const char*) (exoticos), sizeof(animais)*tamanho);
+			arqBinary.close();	
+			system("cls");
+			cout << "Arquivos adicionados com sucesso!"<< endl;
+			cout << endl;
+			cout << "Deseja voltar ao menu ?" << endl;
+			cout << "1 - Sim" << endl;
+			cout << "2 - Nao" << endl;
+			cin >> resposta;
+			if (resposta == 1){
+				resposta=0;
+				menu(exoticos,tamanho,erro);
+				}
+			else if (resposta == 2){
+				exit(2);
+				}
+			else {
+				erro = true;
+				}
 			}
 		}
+			
 	else if(n==5){  //Buscar dados dentro do arquivo
+		resposta = 0;
 		Buscar(exoticos,tamanho,erro);
 		if (erro == false){
 			cout << "Deseja voltar ao menu principal?"<< endl;
@@ -605,8 +639,25 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 			}
 		}
 	else if(n==6){ //deletar dados
+		resposta  = 0;
 		exoticos = Delete(exoticos,tamanho,erro);
-		menu(exoticos,tamanho,erro);
+		system ("cls");
+		cout << "Dado excluido com sucesso!" << endl;
+		cout << endl;
+		cout << "Deseja voltar ao menu principal?"<< endl;
+		cout << "1 - Sim" << endl;
+		cout << "2 - Nao" << endl;
+		cin >> resposta;
+		if (resposta == 1){
+			system("cls");
+			menu(exoticos,tamanho,erro);
+			}
+		else if (resposta == 2){
+			exit(2);
+			}
+		else {
+			erro = true;
+			}
 		}
 	
 	else if(n==0){ //caso de encerramento do programa
