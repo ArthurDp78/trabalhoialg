@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
+#include <cstring>
 
 using namespace std;
 
@@ -12,21 +13,28 @@ struct animais{
 	short vida;	
 };
 
+struct animaiss2{
+	int identificador;
+	char nome[50];
+	char pais[50];
+	char classe[50];
+	short vida;	
+};
+
 animais* leitura(ifstream &arquivo, animais* exoticos,int &tamanho){
 	char lixo;
 	int i=0;
 	while(arquivo){
 		if(i < tamanho){
-		arquivo >> exoticos[i].identificador;
-		arquivo >> lixo; //lê a virgula
-		getline(arquivo, exoticos[i].nome,',');
-		getline(arquivo, exoticos[i].pais,',');
-		arquivo >> exoticos[i].classe;
-		arquivo >> lixo;
-		arquivo >> exoticos[i].vida;
-		arquivo.ignore(); //pula fim de linha
-		
-	}
+			arquivo >> exoticos[i].identificador;
+			arquivo >> lixo; //lê a virgula
+			getline(arquivo, exoticos[i].nome,',');
+			getline(arquivo, exoticos[i].pais,',');
+			arquivo >> exoticos[i].classe;
+			arquivo >> lixo;
+			arquivo >> exoticos[i].vida;
+			arquivo.ignore(); //pula fim de linha
+		}
 		else{
 			
 			animais* novo = new animais[tamanho+5];
@@ -296,7 +304,7 @@ void Buscar(animais* exoticos,int &tamanho,bool &erro){
 
 animais* adcionar(animais* exoticos,int &tamanho,bool &erro){
 	int quantidade;
-	cout << "Quantos animais voce quer adcionar ? ";
+	cout << "Quantos animais voce quer adicionar ? ";
 	cin >> quantidade;
 	system("cls");
 	animais* array = new animais[tamanho+quantidade];
@@ -398,6 +406,7 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 	cout << "4 - Adicionar dados ao arquivo" << endl;
 	cout << "5 - Buscar" << endl;
 	cout << "6 - Deletar dado" << endl;
+	cout << "7 - Impostar e Exportar para arquivo binario" << endl;
 	cout << "0 - Sair do programa" << endl;
 	cin >> n;
 	
@@ -442,7 +451,7 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 			}
 		}	
 	else if(n==3){ // ordenar o vetor 
-		cout <<"Deseja ordenar por identificador ou por nome do animal?"<< endl << endl;
+		cout <<"Deseja ordenar por identificador ou por nome do animal?" << endl << endl;
 		cout << "1 - Identificador" << endl;
 		cout << "2 - Nome"<< endl;
 		cin >> resposta;
@@ -567,57 +576,26 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 		}
 	}
 	else if(n==4){ //salvar alterações no arquivo
-		fstream arquivo("animais.csv");
 		resposta=0;
-		cout << "Deseja adcionar ao .csv ou ao arquivo binario ? " << endl;
-		cout << "1 - .csv" << endl;
-		cout << "2 - Arquivo binario" << endl << endl;
-		int adiciona;
-		cin >> adiciona;
-		if (adiciona == 1){
-			adcionarArquivo(exoticos,tamanho);
-			system("cls");
-			cout << "Arquivos adicionados com sucesso!"<< endl;
-			cout << endl;
-			cout << "Deseja voltar ao menu ?" << endl;
-			cout << "1 - Sim" << endl;
-			cout << "2 - Nao" << endl;
-			cin >> resposta;
-			if (resposta == 1){
-				resposta=0;
-				menu(exoticos,tamanho,erro);
-				}
-			else if (resposta == 2){
-				exit(2);
-				}
-			else {
-				erro = true;
-				}
+		adcionarArquivo(exoticos,tamanho);
+		system("cls");
+		cout << "Arquivos adicionados com sucesso!"<< endl;
+		cout << endl;
+		cout << "Deseja voltar ao menu ?" << endl;
+		cout << "1 - Sim" << endl;
+		cout << "2 - Nao" << endl;
+		cin >> resposta;
+		if (resposta == 1){
+			resposta=0;
+			menu(exoticos,tamanho,erro);
 			}
-		else if (adiciona == 2){
-			ofstream arqBinary("animais2",ios::binary);
-			arqBinary.write((const char*) (exoticos), sizeof(animais)*tamanho);
-			arqBinary.close();	
-			system("cls");
-			cout << "Arquivos adicionados com sucesso!"<< endl;
-			cout << endl;
-			cout << "Deseja voltar ao menu ?" << endl;
-			cout << "1 - Sim" << endl;
-			cout << "2 - Nao" << endl;
-			cin >> resposta;
-			if (resposta == 1){
-				resposta=0;
-				menu(exoticos,tamanho,erro);
-				}
-			else if (resposta == 2){
-				exit(2);
-				}
-			else {
-				erro = true;
-				}
+		else if (resposta == 2){
+			exit(2);
 			}
-		}
-			
+		else {
+			erro = true;
+			}
+		}	
 	else if(n==5){  //Buscar dados dentro do arquivo
 		resposta = 0;
 		Buscar(exoticos,tamanho,erro);
@@ -659,6 +637,68 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 			erro = true;
 			}
 		}
+	else if(n==7){ // import e export
+		resposta = 0;
+		system("cls");
+		cout << "Deseja importar ou exportar ? " << endl;
+		cout << "1 - Importar" << endl;
+		cout << "2 - Exportar" << endl;
+		cin >> resposta;
+		if (resposta == 1){
+			ifstream arquivo("animais",ios::binary);
+			arquivo.read((char *) (exoticos), sizeof(animaiss2)*tamanho);
+			arquivo.close();
+			system("cls");
+			
+			
+			cout << "Arquivo binario lido com sucesso!" << endl << endl;
+			cout << "Deseja voltar ao menu principal?"<< endl;
+			cout << "1 - Sim" << endl;
+			cout << "2 - Nao" << endl;
+			cin >> resposta;
+			if (resposta == 1){
+				system("cls");
+				menu(exoticos,tamanho,erro);
+				}
+			else if (resposta == 2){
+				exit(2);
+				}
+			else {
+				erro = true;
+				}
+			}
+				
+		else if(resposta == 2){
+			animaiss2 *exoticos2 = new animaiss2[100];
+			for (int i =0;i<100;i++){
+				exoticos2[i].identificador = exoticos[i].identificador;
+				strncpy(exoticos2[i].nome,exoticos[i].nome.c_str(),49);
+				strncpy(exoticos2[i].pais,exoticos[i].pais.c_str(),49);
+				strncpy(exoticos2[i].classe,exoticos[i].classe.c_str(),49);
+				exoticos2[i].vida = exoticos[i].vida;
+				}
+			ofstream arqBinary("animais",ios::binary);
+			arqBinary.write((const char*) (exoticos2), sizeof(animaiss2)*tamanho);
+			arqBinary.close();
+			system("cls");
+			cout << "Arquivo binario escrito com sucesso!" << endl << endl;
+			cout << "Deseja voltar ao menu principal?"<< endl;
+			cout << "1 - Sim" << endl;
+			cout << "2 - Nao" << endl;
+			cin >> resposta;
+			if (resposta == 1){
+				system("cls");
+				menu(exoticos,tamanho,erro);
+				}
+			else if (resposta == 2){
+				exit(2);
+				}
+			else {
+				erro = true;
+				}
+			}
+		}
+		
 	
 	else if(n==0){ //caso de encerramento do programa
 		exit(0);
