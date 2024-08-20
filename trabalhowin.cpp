@@ -175,16 +175,18 @@ void saida(animais* exoticos, int &tamanho,bool &erro){
 	cout << "Voce deseja mostrar todos os dados?"<< endl;
 	cout << "1 - Sim"<< endl;
 	cout << "2 - Nao" << endl;
+	
 	int resposta=0;
 	cin >> resposta;
 	system("cls");
 	if(resposta == 1){
 		for(int k = 0; k<tamanho; k++){
-			cout << exoticos[k].identificador << ",";
-			cout << exoticos[k].nome << "," ;
-			cout << exoticos[k].pais << "," ;
-			cout << exoticos[k].classe << ",";
-			cout << exoticos[k].vida << endl;
+			cout <<"Identificador: "<< exoticos[k].identificador << endl ;
+			cout <<"Nome: "<< exoticos[k].nome << endl;
+			cout << "Pais de origem: "<< exoticos[k].pais << endl;
+			cout << "Classe: "<< exoticos[k].classe << endl ;
+			cout << "Tempo de vida: "<< exoticos[k].vida << endl;
+			cout << endl;
 	}
 }
 	else if(resposta== 2){
@@ -193,18 +195,19 @@ void saida(animais* exoticos, int &tamanho,bool &erro){
 		system("cls");
 		cout << "De qual ate qual dado voce quer mostrar?"<< endl;
 		cout << endl;
-		cout << "Comeco: ";
+		cout << "Inicio: ";
 		cin >> n;
-		cout <<"Fim: ";
+		cout <<"Final: ";
 		cin >> j;
 		cout << endl;
 		
 		for(int i=n-1; i<=j-1;i++){
-			cout << exoticos[i].identificador << ",";
-			cout << exoticos[i].nome << "," ;
-			cout << exoticos[i].pais << "," ;
-			cout << exoticos[i].classe << ",";
-			cout << exoticos[i].vida << endl;
+			cout <<"Identificador: "<< exoticos[i].identificador << endl ;
+			cout <<"Nome: "<< exoticos[i].nome << endl;
+			cout << "Pais de origem: "<< exoticos[i].pais << endl;
+			cout << "Classe: "<< exoticos[i].classe << endl ;
+			cout << "Tempo de vida: "<< exoticos[i].vida << endl;
+			cout << endl;
 		}
 		cout << endl;
 	}
