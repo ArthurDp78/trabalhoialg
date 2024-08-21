@@ -181,11 +181,12 @@ void saida(animais* exoticos, int &tamanho,bool &erro){
 	system("cls");
 	if(resposta == 1){
 		for(int k = 0; k<tamanho; k++){
-			cout <<"Identificador: "<< exoticos[k].identificador << endl ;
-			cout <<"Nome: "<< exoticos[k].nome << endl;
+			cout << "Identificador: "<< exoticos[k].identificador << endl ;
+			cout << "Nome: "<< exoticos[k].nome << endl;
 			cout << "Pais de origem: "<< exoticos[k].pais << endl;
 			cout << "Classe: "<< exoticos[k].classe << endl ;
 			cout << "Tempo de vida: "<< exoticos[k].vida << endl;
+			cout << "=======================================================================================================" << endl;
 			cout << endl;
 	}
 }
@@ -266,12 +267,12 @@ void Buscar(animais* exoticos,int &tamanho,bool &erro){
 		int position;
 		position = BuscaBinariaIdent(exoticos,0,tamanho-1,num);
 		if ( position != -1){
-		cout << exoticos[position].identificador << ",";
-		cout << exoticos[position].nome << "," ;
-		cout << exoticos[position].pais << "," ;
-		cout << exoticos[position].classe << ",";
-		cout << exoticos[position].vida << endl;
-		cout << endl;
+			cout << "Identificador: "<< exoticos[position].identificador << endl ;
+			cout << "Nome: "<< exoticos[position].nome << endl;
+			cout << "Pais de origem: "<< exoticos[position].pais << endl;
+			cout << "Classe: "<< exoticos[position].classe << endl ;
+			cout << "Tempo de vida: "<< exoticos[position].vida << endl;
+			cout << endl;
 			}
 		else {
 			cout << "Nao existe esse identificador no arquivo!" << endl << endl;
