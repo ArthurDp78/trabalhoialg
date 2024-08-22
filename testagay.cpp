@@ -738,7 +738,6 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 			ifstream arquivo(nome);
 			string linha;
 			getline(arquivo,linha);
-			tamanho =0;
 			exoticos = leitura(arquivo,exoticos,tamanho);
 			
 			system("cls||clear");
