@@ -209,6 +209,7 @@ void saida(animais* exoticos, int &tamanho,bool &erro){
 			cout << "Pais de origem: "<< exoticos[i].pais << endl;
 			cout << "Classe: "<< exoticos[i].classe << endl ;
 			cout << "Tempo de vida: "<< exoticos[i].vida << endl;
+			cout << "====================================================" << endl;
 			cout << endl;
 		}
 		cout << endl;
