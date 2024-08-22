@@ -715,6 +715,9 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 				erro = true;
 				}
 			}
+			else {
+				erro = true;
+				}
 		}
 		
 	
