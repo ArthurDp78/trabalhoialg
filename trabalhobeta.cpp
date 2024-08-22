@@ -181,13 +181,15 @@ void saida(animais* exoticos, int &tamanho,bool &erro){
 	system("cls||clear");
 	if(resposta == 1){
 		for(int k = 0; k<tamanho; k++){
-			cout << "Identificador: "<< exoticos[k].identificador << endl ;
-			cout << "Nome: "<< exoticos[k].nome << endl;
-			cout << "Pais de origem: "<< exoticos[k].pais << endl;
-			cout << "Classe: "<< exoticos[k].classe << endl ;
-			cout << "Tempo de vida: "<< exoticos[k].vida << endl;
-			cout << "=======================================================================================================" << endl;
-			cout << endl;
+			if(exoticos[k].vida != 0){
+				cout << "Identificador: "<< exoticos[k].identificador << endl ;
+				cout << "Nome: "<< exoticos[k].nome << endl;
+				cout << "Pais de origem: "<< exoticos[k].pais << endl;
+				cout << "Classe: "<< exoticos[k].classe << endl ;
+				cout << "Tempo de vida: "<< exoticos[k].vida << endl;
+				cout << "====================================================" << endl;
+				cout << endl;
+		}
 	}
 }
 	else if(resposta== 2){
@@ -648,9 +650,20 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 		cout << "2 - Exportar" << endl;
 		cin >> resposta;
 		if (resposta == 1){
-			ifstream arquivo("animais",ios::binary);
-			arquivo.read((char *) (exoticos), sizeof(animaiss2)*tamanho);
+			ifstream arquivo("animais");
+			
+			animaiss2* exoticos2 = new animaiss2[tamanho];
+			arquivo.read((char *) (exoticos2), sizeof(animaiss2)*tamanho);
 			arquivo.close();
+			for(int i=0; i<tamanho; i++){
+				exoticos[i].identificador = exoticos2[i].identificador;
+				exoticos[i].classe = exoticos2[i].classe;
+				exoticos[i].nome = exoticos2[i].nome;
+				exoticos[i].vida = exoticos2[i].vida;
+				exoticos[i].pais = exoticos2[i].pais;
+			}
+			delete[] exoticos2;
+				
 			system("cls||clear");
 			
 			
@@ -672,17 +685,18 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 			}
 				
 		else if(resposta == 2){
-			animaiss2 *exoticos2 = new animaiss2[100];
-			for (int i =0;i<100;i++){
+			animaiss2 *exoticos2 = new animaiss2[tamanho];
+			for (int i =0;i<tamanho;i++){
 				exoticos2[i].identificador = exoticos[i].identificador;
 				strncpy(exoticos2[i].nome,exoticos[i].nome.c_str(),49);
 				strncpy(exoticos2[i].pais,exoticos[i].pais.c_str(),49);
 				strncpy(exoticos2[i].classe,exoticos[i].classe.c_str(),49);
 				exoticos2[i].vida = exoticos[i].vida;
 				}
-			ofstream arqBinary("animais",ios::binary);
+			ofstream arqBinary("animais");
 			arqBinary.write((const char*) (exoticos2), sizeof(animaiss2)*tamanho);
 			arqBinary.close();
+			
 			system("cls||clear");
 			cout << "Arquivo binario escrito com sucesso!" << endl << endl;
 			cout << "Deseja voltar ao menu principal?"<< endl;
