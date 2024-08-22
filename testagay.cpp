@@ -413,8 +413,8 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 	cout << "4 - Salvar dados no arquivo" << endl;
 	cout << "5 - Buscar dados" << endl;
 	cout << "6 - Deletar dados" << endl;
-	cout << "7 - Importar e Exportar para arquivo binario" << endl;
-	cout << "8 - Importar e Exportar para arquivo CSV" << endl;
+	cout << "7 - Importar e Exportar um arquivo binario" << endl;
+	cout << "8 - Importar e Exportar um arquivo CSV" << endl;
 	cout << "0 - Sair do programa" << endl;
 	cin >> n;
 	
@@ -670,7 +670,6 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 			delete[] exoticos2;
 				
 			system("cls||clear");
-			
 			
 			cout << "Arquivo binario lido com sucesso!" << endl << endl;
 			cout << "Deseja voltar ao menu principal?"<< endl;
