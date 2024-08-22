@@ -186,7 +186,7 @@ void saida(animais* exoticos, int &tamanho,bool &erro){
 			cout << "Pais de origem: "<< exoticos[k].pais << endl;
 			cout << "Classe: "<< exoticos[k].classe << endl ;
 			cout << "Tempo de vida: "<< exoticos[k].vida << endl;
-			cout << "=======================================================================================================" << endl;
+			cout << "=============================================================" << endl;
 			cout << endl;
 	}
 }
@@ -409,7 +409,7 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 	cout << "4 - Adicionar dados ao arquivo" << endl;
 	cout << "5 - Buscar" << endl;
 	cout << "6 - Deletar dado" << endl;
-	cout << "7 - Impostar e Exportar para arquivo binario" << endl;
+	cout << "7 - Importar e Exportar para arquivo binario" << endl;
 	cout << "0 - Sair do programa" << endl;
 	cin >> n;
 	
