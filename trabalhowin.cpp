@@ -171,29 +171,31 @@ void quicksortNome(animais* exoticos, int pos_pivo, int fim) {
 }	
 
 
+
 void saida(animais* exoticos, int &tamanho,bool &erro){
 	cout << "Voce deseja mostrar todos os dados?"<< endl;
 	cout << "1 - Sim"<< endl;
 	cout << "2 - Nao" << endl;
-	
+	cout << endl << "Digite um numero: ";
 	int resposta=0;
 	cin >> resposta;
-	system("cls");
+	system("cls||clear");
 	if(resposta == 1){
 		for(int k = 0; k<tamanho; k++){
-			cout << "Identificador: "<< exoticos[k].identificador << endl ;
-			cout << "Nome: "<< exoticos[k].nome << endl;
-			cout << "Pais de origem: "<< exoticos[k].pais << endl;
-			cout << "Classe: "<< exoticos[k].classe << endl ;
-			cout << "Tempo de vida: "<< exoticos[k].vida << endl;
-			cout << "=======================================================================================================" << endl;
-			cout << endl;
+			if(exoticos[k].vida != 0){
+				cout << "Identificador: "<< exoticos[k].identificador << endl ;
+				cout << "Nome: "<< exoticos[k].nome << endl;
+				cout << "Pais de origem: "<< exoticos[k].pais << endl;
+				cout << "Classe: "<< exoticos[k].classe << endl ;
+				cout << "Tempo de vida: "<< exoticos[k].vida << endl;
+				cout << "====================================================" << endl;
+				cout << endl;
+		}
 	}
 }
 	else if(resposta== 2){
 		int n=0;
 		int j=0;
-		system("cls");
 		cout << "De qual ate qual dado voce quer mostrar?"<< endl;
 		cout << endl;
 		cout << "Inicio: ";
@@ -208,6 +210,7 @@ void saida(animais* exoticos, int &tamanho,bool &erro){
 			cout << "Pais de origem: "<< exoticos[i].pais << endl;
 			cout << "Classe: "<< exoticos[i].classe << endl ;
 			cout << "Tempo de vida: "<< exoticos[i].vida << endl;
+			cout << "====================================================" << endl;
 			cout << endl;
 		}
 		cout << endl;
@@ -217,8 +220,8 @@ void saida(animais* exoticos, int &tamanho,bool &erro){
 		
 	}
 }
-void adcionarArquivo(animais* exoticos,int &tamanho){
-	ofstream saida("animais.csv");
+void salvarArquivo(ofstream &saida,animais* exoticos,int &tamanho){
+	saida.clear();
 	saida << "# identificador; nome; país; classe; tempo de vida" << endl;
 	for (int g=0;g<tamanho;g++){
 		saida << exoticos[g].identificador << "," << exoticos[g].nome << "," << exoticos[g].pais << "," << exoticos[g].classe << " ," << exoticos[g].vida << endl;
@@ -256,8 +259,9 @@ void Buscar(animais* exoticos,int &tamanho,bool &erro){
 	cout << "Deseja buscar por identificador ou por nome ? " << endl << endl;
 	cout << "1 - Identificador" << endl;
 	cout << "2 - Nome" << endl;
+	cout << endl << "Digite um numero: ";
 	cin >> resposta;
-	system("cls");
+	system("cls||clear");
 	if (resposta == 1){
 		quicksortIdent(exoticos,0,tamanho-1);
 		cout << "Qual identificador deseja buscar ? ";
@@ -310,7 +314,7 @@ animais* adcionar(animais* exoticos,int &tamanho,bool &erro){
 	int quantidade;
 	cout << "Quantos animais voce quer adicionar ? ";
 	cin >> quantidade;
-	system("cls");
+	system("cls||clear");
 	animais* array = new animais[tamanho+quantidade];
 	for(int j=0; j < tamanho; j++){
 				array[j].identificador = exoticos[j].identificador;
@@ -337,19 +341,21 @@ animais* adcionar(animais* exoticos,int &tamanho,bool &erro){
 		cin >> exoticos[i].vida;
 		}	
 	tamanho = tamanho+quantidade;
-	system("cls");
+	system("cls||clear");
 	int resposta;
 	cout << "Dados adicionados com sucesso!" << endl << endl;
 	cout << "Deseja ordenar os animais adcionados? "<< endl;
 	cout << "1 - Sim" << endl;
 	cout << "2 - Nao" << endl;
+	cout << endl << "Digite um numero: ";
 	cin >> resposta;
-	system("cls");
+	system("cls||clear");
 	if (resposta == 1){
 		resposta = 0;
 		cout <<"Deseja ordenar por identificador ou por nome do animal?"<< endl << endl;
 		cout << "1 - Identificador" << endl;
 		cout << "2 - Nome"<< endl;
+		cout << endl << "Digite um numero: ";
 		cin >> resposta;
 		if (resposta == 1){
 			resposta = 0;
@@ -399,24 +405,27 @@ animais* Delete(animais* exoticos,int &tamanho,bool &erro){
 		return exoticos;
 	}
 
+
 void menu(animais* exoticos, int tamanho,bool &erro){
-	system("cls");
+	system("cls||clear");
 	int n;
 	int resposta=0;
 	cout << "O que deseja fazer?" << endl << endl;
 	cout << "1 - Mostrar os dados do existentes no programa" << endl;
-	cout << "2 - Adicionar dados no programa" << endl;
+	cout << "2 - Adicionar dados ao programa" << endl;
 	cout << "3 - Ordenar os dados" << endl;
-	cout << "4 - Adicionar dados ao arquivo" << endl;
-	cout << "5 - Buscar" << endl;
-	cout << "6 - Deletar dado" << endl;
-	cout << "7 - Impostar e Exportar para arquivo binario" << endl;
-	cout << "0 - Sair do programa" << endl;
+	cout << "4 - Salvar dados no arquivo" << endl;
+	cout << "5 - Buscar dados" << endl;
+	cout << "6 - Deletar dados" << endl;
+	cout << "7 - Importar e Exportar um arquivo binario" << endl;
+	cout << "8 - Importar e Exportar um arquivo CSV" << endl;
+	cout << "0 - Sair do programa" << endl << endl;
+	cout << "Digite um numero: ";
 	cin >> n;
 	
 	
 	
-	system("cls");
+	system("cls||clear");
 	if(n == 1){    //caso de saida
 		saida(exoticos,tamanho,erro);
 		if (erro == false){
@@ -424,23 +433,31 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 			cout << "Deseja voltar ao menu principal?"<< endl;
 			cout << "1 - Sim" << endl;
 			cout << "2 - Nao" << endl;
-			
+			cout << endl << "Digite um numero: ";
 			cin >> resposta;
 			
 			if(resposta ==1){
-			system("cls");
+			system("cls||clear");
 			menu(exoticos,tamanho,erro);
+			}
+			else if (resposta == 2){
+			exit(2);
+			}
+		else {
+			resposta = 0;
+			erro = true;
 			}
 		}
 	}
 	else if(n == 2){	   //caso de adição de animais
 		resposta = 0;
 		exoticos = adcionar(exoticos,tamanho,erro);
-		system("cls");
+		system("cls||clear");
 		cout << "Dados atualizados com sucesso!" << endl << endl;
 		cout << "Deseja voltar ao menu ? " << endl;
 		cout << "1 - Sim" << endl;
 		cout << "2 - Nao" << endl;
+		cout << endl << "Digite um numero: ";
 		cin >> resposta;
 		if (resposta == 1){
 			resposta=0;
@@ -458,32 +475,35 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 		cout <<"Deseja ordenar por identificador ou por nome do animal?" << endl << endl;
 		cout << "1 - Identificador" << endl;
 		cout << "2 - Nome"<< endl;
+		cout << endl << "Digite um numero: ";
 		cin >> resposta;
 		
 		if(resposta == 1){//ordenar por identificador
 			resposta = 0;
 			quicksortIdent(exoticos,0,tamanho-1);
-			system("cls");
+			system("cls||clear");
 			cout << "Os dados foram ordenados por identificador!" << endl;
 			cout << endl;
 			
 			cout << "Deseja ver os dados?" << endl;
 			cout <<"1- Sim" << endl;
 			cout <<"2- Nao" << endl;
+			cout << endl << "Digite um numero: ";
 			cin >> resposta;
 			
 			if(resposta ==1){
-				system("cls");
+				system("cls||clear");
 				resposta =0;
 				saida(exoticos,tamanho,erro);
 				cout << endl;
 				cout << "Deseja voltar ao menu principal?"<< endl;
 				cout << "1 - Sim" << endl;
 				cout << "2 - Nao" << endl;
+				cout << endl << "Digite um numero: ";
 				cin >> resposta;
 		
 				if(resposta ==1){
-					system("cls");
+					system("cls||clear");
 					menu(exoticos,tamanho,erro);
 				}
 				else if(resposta == 2){
@@ -494,15 +514,16 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 				}
 			}
 			else if(resposta == 2){
-				system("cls");
+				system("cls||clear");
 				resposta =0;
 				cout << "Deseja voltar ao menu principal?"<< endl;
 				cout << "1 - Sim" << endl;
 				cout << "2 - Nao" << endl;
+				cout << endl << "Digite um numero: ";
 				cin >> resposta;
 				
 					if(resposta ==1){
-						system("cls");
+						system("cls||clear");
 						menu(exoticos,tamanho,erro);
 					}
 					else if(resposta == 2){
@@ -520,27 +541,29 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 		else if(resposta == 2){//ordenar por nome do animal
 			resposta = 0;
 			quicksortNome(exoticos,0,tamanho-1);
-			system("cls");
+			system("cls||clear");
 			cout << "Os dados foram ordenados por nome!" << endl;
 			cout << endl;
 			
 			cout << "Deseja ver os dados?" << endl;
 			cout <<"1 - Sim" << endl;
 			cout <<"2 - Nao" << endl;
+			cout << endl << "Digite um numero: ";
 			cin >> resposta;
 			
 			if(resposta ==1){
-				system("cls");
+				system("cls||clear");
 				resposta =0;
 				saida(exoticos,tamanho,erro);
 				cout << endl;
 				cout << "Deseja voltar ao menu principal?"<< endl;
 				cout << "1 - Sim" << endl;
 				cout << "2 - Nao" << endl;
+				cout << endl << "Digite um numero: ";
 				cin >> resposta;
 		
 				if(resposta ==1){
-					system("cls");
+					system("cls||clear");
 					menu(exoticos,tamanho,erro);
 				}
 				else if(resposta == 2){
@@ -556,6 +579,7 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 				cout << "Deseja voltar ao menu principal?"<< endl;
 				cout << "1 - Sim" << endl;
 				cout << "2 - Nao" << endl;
+				cout << endl << "Digite um numero: ";
 				cin >> resposta;
 				
 					if(resposta ==1){
@@ -581,13 +605,16 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 	}
 	else if(n==4){ //salvar alterações no arquivo
 		resposta=0;
-		adcionarArquivo(exoticos,tamanho);
-		system("cls");
-		cout << "Arquivos adicionados com sucesso!"<< endl;
+		ofstream saida("animais.csv");
+		salvarArquivo(saida,exoticos,tamanho);
+		saida.close();
+		system("cls||clear");
+		cout << "Dados salvos no arquivo com sucesso!"<< endl;
 		cout << endl;
 		cout << "Deseja voltar ao menu ?" << endl;
 		cout << "1 - Sim" << endl;
 		cout << "2 - Nao" << endl;
+		cout << endl << "Digite um numero: ";
 		cin >> resposta;
 		if (resposta == 1){
 			resposta=0;
@@ -607,9 +634,10 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 			cout << "Deseja voltar ao menu principal?"<< endl;
 			cout << "1 - Sim" << endl;
 			cout << "2 - Nao" << endl;
+			cout << endl << "Digite um numero: ";
 			cin >> resposta;
 			if(resposta ==1){
-				system("cls");
+				system("cls||clear");
 				menu(exoticos,tamanho,erro);
 				}
 			else if(resposta == 2){
@@ -623,15 +651,16 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 	else if(n==6){ //deletar dados
 		resposta  = 0;
 		exoticos = Delete(exoticos,tamanho,erro);
-		system ("cls");
+		system ("cls||clear");
 		cout << "Dado excluido com sucesso!" << endl;
 		cout << endl;
 		cout << "Deseja voltar ao menu principal?"<< endl;
 		cout << "1 - Sim" << endl;
 		cout << "2 - Nao" << endl;
+		cout << endl << "Digite um numero: ";
 		cin >> resposta;
 		if (resposta == 1){
-			system("cls");
+			system("cls||clear");
 			menu(exoticos,tamanho,erro);
 			}
 		else if (resposta == 2){
@@ -641,27 +670,39 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 			erro = true;
 			}
 		}
-	else if(n==7){ // import e export
+	else if(n==7){ // importar e exportar binario
 		resposta = 0;
-		system("cls");
-		cout << "Deseja importar ou exportar ? " << endl;
+		system("cls||clear");
+		cout << "Deseja importar ou exportar  ? " << endl;
 		cout << "1 - Importar" << endl;
 		cout << "2 - Exportar" << endl;
+		cout << endl << "Digite um numero: ";
 		cin >> resposta;
 		if (resposta == 1){
-			ifstream arquivo("animais",ios::binary);
-			arquivo.read((char *) (exoticos), sizeof(animaiss2)*tamanho);
-			arquivo.close();
-			system("cls");
+			ifstream arquivo("animais");
 			
+			animaiss2* exoticos2 = new animaiss2[tamanho];
+			arquivo.read((char *) (exoticos2), sizeof(animaiss2)*tamanho);
+			arquivo.close();
+			for(int i=0; i<tamanho; i++){
+				exoticos[i].identificador = exoticos2[i].identificador;
+				exoticos[i].classe = exoticos2[i].classe;
+				exoticos[i].nome = exoticos2[i].nome;
+				exoticos[i].vida = exoticos2[i].vida;
+				exoticos[i].pais = exoticos2[i].pais;
+			}
+			delete[] exoticos2;
+				
+			system("cls||clear");
 			
 			cout << "Arquivo binario lido com sucesso!" << endl << endl;
 			cout << "Deseja voltar ao menu principal?"<< endl;
 			cout << "1 - Sim" << endl;
 			cout << "2 - Nao" << endl;
+			cout << endl << "Digite um numero: ";
 			cin >> resposta;
 			if (resposta == 1){
-				system("cls");
+				system("cls||clear");
 				menu(exoticos,tamanho,erro);
 				}
 			else if (resposta == 2){
@@ -673,25 +714,27 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 			}
 				
 		else if(resposta == 2){
-			animaiss2 *exoticos2 = new animaiss2[100];
-			for (int i =0;i<100;i++){
+			animaiss2 *exoticos2 = new animaiss2[tamanho];
+			for (int i =0;i<tamanho;i++){
 				exoticos2[i].identificador = exoticos[i].identificador;
 				strncpy(exoticos2[i].nome,exoticos[i].nome.c_str(),49);
 				strncpy(exoticos2[i].pais,exoticos[i].pais.c_str(),49);
 				strncpy(exoticos2[i].classe,exoticos[i].classe.c_str(),49);
 				exoticos2[i].vida = exoticos[i].vida;
 				}
-			ofstream arqBinary("animais",ios::binary);
+			ofstream arqBinary("animais");
 			arqBinary.write((const char*) (exoticos2), sizeof(animaiss2)*tamanho);
 			arqBinary.close();
-			system("cls");
+			
+			system("cls||clear");
 			cout << "Arquivo binario escrito com sucesso!" << endl << endl;
 			cout << "Deseja voltar ao menu principal?"<< endl;
 			cout << "1 - Sim" << endl;
 			cout << "2 - Nao" << endl;
+			cout << endl << "Digite um numero: ";
 			cin >> resposta;
 			if (resposta == 1){
-				system("cls");
+				system("cls||clear");
 				menu(exoticos,tamanho,erro);
 				}
 			else if (resposta == 2){
@@ -701,8 +744,89 @@ void menu(animais* exoticos, int tamanho,bool &erro){
 				erro = true;
 				}
 			}
+			else {
+				erro = true;
+				}
+		}
+	else if(n==8){ //importar e exportar csv
+		string nome;
+		resposta =0;
+		cout << "Deseja importar ou exportar um arquivo CSV ?" << endl;
+		cout << "1 - Importar"<< endl;
+		cout << "2 - Exportar"<<endl;
+		cout << endl << "Digite um numero: ";
+		cin >> resposta;
+		if(resposta == 1){	
+			system("cls||clear");
+			delete[] exoticos;
+			cout <<"Digite o nome do arquivo CSV: ";
+			cin >> nome;
+			ifstream arquivo(nome);
+			string linha, sai2, sai3, sai4;
+			int sai1,  c=0;
+			short sai5;
+			while(arquivo){
+				arquivo >> sai1 >> sai2 >> sai3 >> sai4 >> sai5;
+				c++;
+				}
+			arquivo.clear();
+			arquivo.seekg(ios::beg);
+			tamanho=c;
+			getline(arquivo,linha);
+			exoticos = leitura(arquivo,exoticos,tamanho);
+			
+			system("cls||clear");
+			cout << "Dados importados com sucesso!";
+			cout << endl<< endl;
+			cout << "Deseja voltar ao menu principal?"<< endl;
+			cout << "1 - Sim" << endl;
+			cout << "2 - Nao" << endl;
+			cout << endl << "Digite um numero: ";
+			cin >> resposta;
+			
+			if (resposta == 1){
+				system("cls||clear");
+				menu(exoticos,tamanho,erro);
+				}
+			else if (resposta == 2){
+				exit(2);
+				}
+			else {
+				erro = true;
+				}
 		}
 		
+		else if(resposta ==2){
+			system("cls||clear");
+			cout <<"Digite o nome do arquivo CSV: ";
+			cin >> nome;
+			ofstream saida(nome);
+			salvarArquivo(saida,exoticos,tamanho);
+			saida.close();
+			system("cls||clear");
+			cout <<"Dados exportados com sucesso!";
+			cout << endl<< endl;
+			cout << "Deseja voltar ao menu principal?"<< endl;
+			cout << "1 - Sim" << endl;
+			cout << "2 - Nao" << endl;
+			cout << endl << "Digite um numero: ";
+			cin >> resposta;
+			
+			if (resposta == 1){
+				system("cls||clear");
+				menu(exoticos,tamanho,erro);
+				}
+			else if (resposta == 2){
+				exit(2);
+				}
+			else {
+				erro = true;
+				}
+		}
+		else{
+			erro = true;
+		}
+	}
 	
 	else if(n==0){ //caso de encerramento do programa
 		exit(0);
@@ -731,12 +855,13 @@ int main(){
 	
 	int resposta;
 	while(erro == true){ //repetiçao do erro
-		system("cls");
+		system("cls||clear");
 		cout << "Nao existe essa opcao no programa" << endl;
 		cout << endl;
 		cout << "Deseja voltar ao menu principal?"<< endl;
 		cout << "1 - Sim" << endl;
 		cout << "2 - Nao" << endl;
+		cout << endl << "Digite um numero: ";
 		cin >> resposta;
 		
 		if(resposta == 1){
@@ -747,7 +872,7 @@ int main(){
 			exit(2);
 		}
 		else{
-			system("cls");
+			system("cls||clear");
 		}
 	}
 	return 0;
